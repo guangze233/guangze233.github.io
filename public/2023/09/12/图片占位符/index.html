@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"drumup.tech","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="需求：tinymce 编辑器中需要一个图片占位符，上面展示一些配置项，有后端根据配置项完成图片替换，前端可双击弹框修改配置项。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图片占位符">
+<meta property="og:url" content="https://drumup.tech/2023/09/12/%E5%9B%BE%E7%89%87%E5%8D%A0%E4%BD%8D%E7%AC%A6/index.html">
+<meta property="og:site_name" content="小前端">
+<meta property="og:description" content="需求：tinymce 编辑器中需要一个图片占位符，上面展示一些配置项，有后端根据配置项完成图片替换，前端可双击弹框修改配置项。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-12T01:12:43.000Z">
+<meta property="article:modified_time" content="2023-09-13T08:35:59.977Z">
+<meta property="article:author" content="guangze233">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://drumup.tech/2023/09/12/%E5%9B%BE%E7%89%87%E5%8D%A0%E4%BD%8D%E7%AC%A6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://drumup.tech/2023/09/12/%E5%9B%BE%E7%89%87%E5%8D%A0%E4%BD%8D%E7%AC%A6/","path":"2023/09/12/图片占位符/","title":"图片占位符"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>图片占位符 | 小前端</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">小前端</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%8D%A0%E4%BD%8D%E7%AC%A6"><span class="nav-number">2.</span> <span class="nav-text">文本占位符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82"><span class="nav-number">2.1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B2%98%E8%B4%B4%E5%8D%A0%E4%BD%8D%E7%AC%A6"><span class="nav-number">2.3.</span> <span class="nav-text">粘贴占位符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%A1%8C-n-%E4%B8%AA"><span class="nav-number">2.4.</span> <span class="nav-text">一行 n 个</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E5%8D%A0%E4%BD%8D%E7%AC%A6"><span class="nav-number">3.</span> <span class="nav-text">表单占位符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82-1"><span class="nav-number">3.1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.2.</span> <span class="nav-text">设计与实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E4%BC%98%E5%8C%96"><span class="nav-number">3.3.</span> <span class="nav-text">异步优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E5%9C%BA%E6%99%AF"><span class="nav-number">3.3.1.</span> <span class="nav-text">前置场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E4%BC%98%E5%8C%96-1"><span class="nav-number">3.3.2.</span> <span class="nav-text">异步优化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E8%A1%A8%E5%8D%95"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">图片表单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#worker-js"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">worker.js</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="guangze233"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">guangze233</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/guangze233" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;guangze233" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:194463810@qq.com" title="E-Mail → mailto:194463810@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://tonzhon.com/" title="https:&#x2F;&#x2F;tonzhon.com&#x2F;" rel="noopener" target="_blank">铜钟</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://drumup.tech/terrain/#/" title="https:&#x2F;&#x2F;drumup.tech&#x2F;terrain&#x2F;#&#x2F;">Terrain</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://drumup.tech/2023/09/12/%E5%9B%BE%E7%89%87%E5%8D%A0%E4%BD%8D%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="guangze233">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小前端">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="图片占位符 | 小前端">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图片占位符
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-12 09:12:43" itemprop="dateCreated datePublished" datetime="2023-09-12T09:12:43+08:00">2023-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-13 16:35:59" itemprop="dateModified" datetime="2023-09-13T16:35:59+08:00">2023-09-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/canvas/" itemprop="url" rel="index"><span itemprop="name">canvas</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>需求：tinymce 编辑器中需要一个图片占位符，上面展示一些配置项，有后端根据配置项完成图片替换，前端可双击弹框修改配置项。</p>
+<span id="more"></span>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li>绘制文字：使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/fillText">CanvasRenderingContext2.fillText()</a> 绘制文本，使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/measureText">CanvasRenderingContext2D.measureText()</a> 来判断一行长文字何时换行展示。</li>
+<li>保存配置项数据：使用 data-json 自定义属性保存配置项，前端根据 data-json <strong>动态生成</strong>图片占位符的 base64 替换页面中图片占位符的 src 属性；后端可根据 data-json 生成真实数据，或修改图片占位符。</li>
+<li>双击修改：监听双击事件，过滤图片占位符，从 data-json 中取出数据回填到弹框中；每个图片占位符绑定一个 mceId，用于修改时回填配置项数据和重新生成 base64。</li>
+</ol>
+<h2 id="文本占位符"><a href="#文本占位符" class="headerlink" title="文本占位符"></a>文本占位符</h2><h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>用户在弹框中选择选项，确认后将在 tinymce 编辑器中插入一张图片占位符，上面展示刚才选择的选项，有后端根据配置项完成图片替换，前端可双击弹框修改配置项。</p>
+<p>图片占位符上展示”标题” 和一行文字。例如 <em>@{xxx/yyy/zzz}</em></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>参考 <a target="_blank" rel="noopener" href="https://www.zhangxinxu.com/wordpress/2018/02/canvas-text-break-line-letter-spacing-vertical/">canvas 文本绘制自动换行、字间距、竖排等实现</a>：将文本分割为字符串，逐渐加字并测量长度，超过指定宽度时换行绘制。</p>
+<blockquote>
+<p>写的过程中发现 MDN fillText 的中文翻译有歧义：<a target="_blank" rel="noopener" href="https://github.com/mdn/translated-content/issues/14860">fillText 参数 y 的中文描述歧义</a>。<strong>good first issue</strong> 参与大型开源项目了，属于是 : )</p>
+</blockquote>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
+ * @description 文字转Base64
+ * @param &#123;*&#125; content 文字
+ * @param &#123;*&#125; width 生成图片的宽度
+ * @param &#123;*&#125; height 生成图片的高度
+ * @returns base64
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">text2img</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">content<span class="token punctuation">,</span> options <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> _options <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token number">635</span><span class="token punctuation">,</span> <span class="token comment">// px</span>
+    <span class="token literal-property property">height</span><span class="token operator">:</span> <span class="token number">152</span><span class="token punctuation">,</span> <span class="token comment">//px</span>
+    <span class="token literal-property property">fontSize</span><span class="token operator">:</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token comment">//px</span>
+    <span class="token literal-property property">fontColor</span><span class="token operator">:</span> <span class="token string">"#409EFF"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> <span class="token string">"serif"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">backgroundColor</span><span class="token operator">:</span> <span class="token string">"#F4F4F5"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"【xx统计图】"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">imgType</span><span class="token operator">:</span> <span class="token string">"image/webp"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">encoderOptions</span><span class="token operator">:</span> <span class="token number">0.6</span><span class="token punctuation">,</span>
+    <span class="token operator">...</span>options<span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> canvas <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"canvas"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  canvas<span class="token punctuation">.</span>width <span class="token operator">=</span> _options<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
+  canvas<span class="token punctuation">.</span>height <span class="token operator">=</span> _options<span class="token punctuation">.</span>height<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> ctx <span class="token operator">=</span> canvas<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token string">"2d"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// background</span>
+  ctx<span class="token punctuation">.</span>fillStyle <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>_options<span class="token punctuation">.</span>backgroundColor<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+  ctx<span class="token punctuation">.</span><span class="token function">fillRect</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> canvas<span class="token punctuation">.</span>width<span class="token punctuation">,</span> canvas<span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// font</span>
+  ctx<span class="token punctuation">.</span>font <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>_options<span class="token punctuation">.</span>fontSize<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">px </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>_options<span class="token punctuation">.</span>fontFamily<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+  ctx<span class="token punctuation">.</span>fillStyle <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>_options<span class="token punctuation">.</span>fontColor<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+  <span class="token comment">// calc number of words per line</span>
+  <span class="token keyword">let</span> wordsPerLine <span class="token operator">=</span> content<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> charList <span class="token operator">=</span> content<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> charList<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> text <span class="token operator">=</span> ctx<span class="token punctuation">.</span><span class="token function">measureText</span><span class="token punctuation">(</span>content<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>text<span class="token punctuation">.</span>width <span class="token operator">>=</span> _options<span class="token punctuation">.</span>width <span class="token operator">-</span> _options<span class="token punctuation">.</span>fontSize<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      wordsPerLine <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">// split content into lines</span>
+  <span class="token keyword">const</span> lines <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span>content<span class="token punctuation">.</span>length <span class="token operator">/</span> wordsPerLine<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">===</span> Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span>content<span class="token punctuation">.</span>length <span class="token operator">/</span> wordsPerLine<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      lines<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>content<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>i <span class="token operator">*</span> wordsPerLine<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      lines<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>content<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>i <span class="token operator">*</span> wordsPerLine<span class="token punctuation">,</span> <span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> wordsPerLine<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">// draw title</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>_options<span class="token punctuation">.</span>title<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    ctx<span class="token punctuation">.</span>font <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">bold </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>_options<span class="token punctuation">.</span>fontSize<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">px </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>_options<span class="token punctuation">.</span>fontFamily<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">fillText</span><span class="token punctuation">(</span>
+      _options<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+      <span class="token number">10</span><span class="token punctuation">,</span>
+      <span class="token number">10</span> <span class="token operator">+</span> _options<span class="token punctuation">.</span>fontSize<span class="token punctuation">,</span>
+      _options<span class="token punctuation">.</span>width <span class="token operator">-</span> _options<span class="token punctuation">.</span>fontSize
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  ctx<span class="token punctuation">.</span>font <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>_options<span class="token punctuation">.</span>fontSize<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">px </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>_options<span class="token punctuation">.</span>fontFamily<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+  <span class="token comment">// draw content</span>
+  <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>lines<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> text <span class="token operator">=</span> ctx<span class="token punctuation">.</span><span class="token function">measureText</span><span class="token punctuation">(</span>lines<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    x <span class="token operator">=</span> canvas<span class="token punctuation">.</span>width <span class="token operator">>=</span> text<span class="token punctuation">.</span>width <span class="token operator">?</span> <span class="token punctuation">(</span>canvas<span class="token punctuation">.</span>width <span class="token operator">-</span> text<span class="token punctuation">.</span>width<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span> <span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">const</span> lineMarginBottom <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> linesHeight <span class="token operator">=</span> <span class="token punctuation">(</span>_options<span class="token punctuation">.</span>fontSize <span class="token operator">+</span> lineMarginBottom<span class="token punctuation">)</span> <span class="token operator">*</span> lines<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> y <span class="token operator">=</span> <span class="token punctuation">(</span>canvas<span class="token punctuation">.</span>height <span class="token operator">-</span> linesHeight<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span> <span class="token operator">+</span> _options<span class="token punctuation">.</span>fontSize<span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> lines<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> line <span class="token operator">=</span> lines<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">fillText</span><span class="token punctuation">(</span>
+      line<span class="token punctuation">,</span>
+      i <span class="token operator">===</span> <span class="token number">0</span> <span class="token operator">?</span> x <span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+      y <span class="token operator">+</span> i <span class="token operator">*</span> <span class="token punctuation">(</span>_options<span class="token punctuation">.</span>fontSize <span class="token operator">+</span> lineMarginBottom<span class="token punctuation">)</span><span class="token punctuation">,</span>
+      _options<span class="token punctuation">.</span>width <span class="token operator">-</span> _options<span class="token punctuation">.</span>fontSize
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> canvas
+    <span class="token punctuation">.</span><span class="token function">toDataURL</span><span class="token punctuation">(</span>_options<span class="token punctuation">.</span>imgType<span class="token punctuation">,</span> _options<span class="token punctuation">.</span>encoderOptions<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\s</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="粘贴占位符"><a href="#粘贴占位符" class="headerlink" title="粘贴占位符"></a>粘贴占位符</h3><p>场景: 用户可能会复制、剪切、粘贴生成的图片占位符，若直接复制粘贴，tinymce 中会有两个一样的 mceId，无法完成双击修改配置项。</p>
+<p>万幸！TinyMce 提供了粘贴处理事件 <a target="_blank" rel="noopener" href="https://www.tiny.cloud/docs/tinymce/6/copy-and-paste/#paste_postprocess">paste_postprocess</a>，在这里检查粘贴的 mceId 是否已存在，已存在则更新。更巧的是，此时 tinymce 内容是复制/剪切后的，即剪切（ctrl+x）时原内容已去除了，直接粘贴即可。</p>
+<blockquote>
+<p><strong>paste_postprocess</strong><br>This option enables you to modify the pasted content before it gets inserted into the editor, but after it’s been parsed into a DOM structure.</p>
+</blockquote>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/** 粘贴事件：粘贴的元素id唯一 */</span>
+<span class="token keyword">async</span> <span class="token function">onPastePostprocess</span><span class="token punctuation">(</span><span class="token parameter">editor<span class="token punctuation">,</span> args</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> root <span class="token operator">=</span> args<span class="token punctuation">.</span>node
+  <span class="token comment">// 去除重复id</span>
+    <span class="token keyword">const</span> mceIdElementList <span class="token operator">=</span> root<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">'[data-mce-id]'</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>mceIdElementList <span class="token operator">&amp;&amp;</span> mceIdElementList<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> currentTimestamp <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      mceIdElementList<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">e<span class="token punctuation">,</span> index</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          <span class="token keyword">const</span> newMceId <span class="token operator">=</span> TinyUtil<span class="token punctuation">.</span><span class="token function">getNewMecId</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>dataset<span class="token punctuation">.</span>mceId<span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>currentTimestamp<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">_</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>index<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+          e<span class="token punctuation">.</span>id <span class="token operator">=</span> e<span class="token punctuation">.</span>dataset<span class="token punctuation">.</span>mceId <span class="token operator">=</span> newMceId
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/** 业务工具 */</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">TinyUtil</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">static</span> <span class="token function">getNewMecId</span><span class="token punctuation">(</span><span class="token parameter">oldMceId<span class="token punctuation">,</span> newUuid</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> idComponents <span class="token operator">=</span> oldMceId<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'-'</span><span class="token punctuation">)</span>
+    idComponents<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> newUuid
+    <span class="token keyword">return</span> idComponents<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">'-'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="一行-n-个"><a href="#一行-n-个" class="headerlink" title="一行 n 个"></a>一行 n 个</h3><p>需求变了：用户在系统弹框中选择了一些配置项，请求<strong>后端接口返回一系列配置项</strong>，要求展示这些图片占位符并且可以自定义一行展示几个（一行可选个数：1、2、3、4）。</p>
+<ol>
+<li>批量生成图片占位符：循环生成即可。</li>
+<li>一行 n 个：这些图片占位符外层套一层 grid 布局；由于 tinymce 宽度是确定的，可根据每行展示个数确认图片占位符的宽度，并修改字体大小以 <del>美观</del> 不丑陋。</li>
+</ol>
+<blockquote>
+<p>外层的 grid 布局会影响到输入正常内容，如在 grid 内部回车换行后输入新内容，则新行也存在 grid 样式，十分冗余难受。<br>可监听 tinymce 的 <a target="_blank" rel="noopener" href="https://www.tiny.cloud/docs/tinymce/6/events/#editor-core-events">NewBlock</a> 事件，以处理新行样式。</p>
+</blockquote>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// grid 样式</span>
+<span class="token keyword">const</span> wrapper <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'p'</span><span class="token punctuation">)</span>
+wrapper<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'img-holder-grid-wrapper'</span><span class="token punctuation">)</span>
+wrapper<span class="token punctuation">.</span>style<span class="token punctuation">.</span>display <span class="token operator">=</span> <span class="token string">'grid'</span>
+wrapper<span class="token punctuation">.</span>style<span class="token punctuation">.</span>gridTemplateColumns <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span>placeholder<span class="token punctuation">.</span>columns<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token string">'1fr'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span>
+wrapper<span class="token punctuation">.</span>style<span class="token punctuation">.</span>gap <span class="token operator">=</span> <span class="token string">'5px'</span>
+wrapper<span class="token punctuation">.</span>dataset<span class="token punctuation">.</span>type <span class="token operator">=</span> <span class="token string">'lineWrap'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 图片大小</span>
+<span class="token literal-property property">width</span><span class="token operator">:</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span><span class="token number">635</span> <span class="token operator">/</span> columns<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token literal-property property">height</span><span class="token operator">:</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span><span class="token number">152</span> <span class="token operator">-</span> <span class="token punctuation">(</span>columns <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token literal-property property">fontSize</span><span class="token operator">:</span> <span class="token number">16</span> <span class="token operator">-</span> <span class="token punctuation">(</span>columns <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="表单占位符"><a href="#表单占位符" class="headerlink" title="表单占位符"></a>表单占位符</h2><h3 id="需求-1"><a href="#需求-1" class="headerlink" title="需求"></a>需求</h3><p>过了几天，领导想要在图片占位符上展示更多的信息，最好能把自定义弹框里的选项都展示出来，文字拼接展示太丑了。</p>
+<h3 id="设计与实现"><a href="#设计与实现" class="headerlink" title="设计与实现"></a>设计与实现</h3><p>已经不想改需求了，恰好发现项目中在用的第三方库 <a target="_blank" rel="noopener" href="http://fabricjs.com/">Fabric.js</a> 有文字换行功能。太好了！拿来就用！！！</p>
+<p>让后端把配置项整理成数组形式 [{label, content}, {label, content}]</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span>fabric<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'fabric'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">TinyUtil</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">/** 生成图片占位符 */</span>
+  <span class="token keyword">static</span> <span class="token function">genImgHolderByForm</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span>caption<span class="token punctuation">,</span> formCfg<span class="token punctuation">,</span> columns <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> img <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'img'</span><span class="token punctuation">)</span>
+    img<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'img-holder'</span><span class="token punctuation">)</span>
+    img<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'mce-img-holder'</span><span class="token punctuation">)</span>
+    img<span class="token punctuation">.</span>src <span class="token operator">=</span> TinyUtil<span class="token punctuation">.</span><span class="token function">form2img</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> formCfg <span class="token operator">===</span> <span class="token string">'string'</span> <span class="token operator">?</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>formCfg<span class="token punctuation">)</span> <span class="token operator">:</span> formCfg<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">caption</span><span class="token operator">:</span> caption<span class="token punctuation">,</span>
+      <span class="token literal-property property">imgWidth</span><span class="token operator">:</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span><span class="token number">635</span> <span class="token operator">/</span> columns<span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">imgHeight</span><span class="token operator">:</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span><span class="token number">152</span> <span class="token operator">-</span> <span class="token punctuation">(</span>columns <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">fontSize</span><span class="token operator">:</span> <span class="token number">16</span> <span class="token operator">-</span> <span class="token punctuation">(</span>columns <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> img
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token comment">/** 图片表单 */</span>
+  <span class="token keyword">static</span> <span class="token function">form2img</span><span class="token punctuation">(</span><span class="token parameter">formCfg<span class="token punctuation">,</span> params</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">imgWidth</span><span class="token operator">:</span> params<span class="token operator">?.</span>imgWidth <span class="token operator">||</span> <span class="token number">300</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">imgHeight</span><span class="token operator">:</span> params<span class="token operator">?.</span>imgHeight <span class="token operator">||</span> <span class="token number">150</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> <span class="token string">'serif'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">fontSize</span><span class="token operator">:</span> params<span class="token operator">?.</span>fontSize <span class="token operator">||</span> <span class="token number">14</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">fontColor</span><span class="token operator">:</span> params<span class="token operator">?.</span>fontColor <span class="token operator">||</span> <span class="token string">'#409EFF'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">backgroundColor</span><span class="token operator">:</span> params<span class="token operator">?.</span>backgroundColor <span class="token operator">||</span> <span class="token string">'#F4F4F5'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">padding</span><span class="token operator">:</span> params<span class="token punctuation">.</span>padding <span class="token operator">||</span> <span class="token number">10</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">labelWidth</span><span class="token operator">:</span> <span class="token punctuation">(</span>params<span class="token operator">?.</span>fontSize <span class="token operator">||</span> <span class="token number">14</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">const</span> canvas <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">fabric<span class="token punctuation">.</span>Canvas</span><span class="token punctuation">(</span><span class="token string">'canvasBox'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">width</span><span class="token operator">:</span> options<span class="token punctuation">.</span>imgWidth<span class="token punctuation">,</span>
+      <span class="token literal-property property">height</span><span class="token operator">:</span> options<span class="token punctuation">.</span>imgHeight<span class="token punctuation">,</span>
+      <span class="token literal-property property">backgroundColor</span><span class="token operator">:</span> options<span class="token punctuation">.</span>backgroundColor<span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token keyword">let</span> nextTop <span class="token operator">=</span> <span class="token number">20</span>
+    <span class="token comment">// draw caption</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>params<span class="token operator">?.</span>caption<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> caption <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">fabric<span class="token punctuation">.</span>Text</span><span class="token punctuation">(</span>params<span class="token operator">?.</span>caption<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontFamily<span class="token punctuation">,</span>
+        <span class="token literal-property property">fontSize</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontSize<span class="token punctuation">,</span>
+        <span class="token literal-property property">fontWeight</span><span class="token operator">:</span> <span class="token string">'bold'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">fill</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontColor<span class="token punctuation">,</span>
+        <span class="token literal-property property">left</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">top</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+      canvas<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>caption<span class="token punctuation">)</span>
+      nextTop <span class="token operator">=</span> <span class="token number">10</span> <span class="token operator">+</span> caption<span class="token punctuation">.</span>height <span class="token operator">+</span> <span class="token number">10</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">// get max label width</span>
+    <span class="token keyword">let</span> labelWidth <span class="token operator">=</span> options<span class="token punctuation">.</span>labelWidth
+    formCfg<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> measureTabel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">fabric<span class="token punctuation">.</span>Textbox</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>item<span class="token punctuation">.</span>label<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">：</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">left</span><span class="token operator">:</span> options<span class="token punctuation">.</span>padding<span class="token punctuation">,</span>
+        <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontFamily<span class="token punctuation">,</span>
+        <span class="token literal-property property">fontSize</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontSize<span class="token punctuation">,</span>
+        <span class="token literal-property property">fill</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontColor<span class="token punctuation">,</span>
+        <span class="token literal-property property">textAlign</span><span class="token operator">:</span> <span class="token string">'right'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">top</span><span class="token operator">:</span> nextTop<span class="token punctuation">,</span>
+        <span class="token literal-property property">width</span><span class="token operator">:</span> labelWidth<span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>labelWidth <span class="token operator">&lt;</span> measureTabel<span class="token punctuation">.</span>width<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        labelWidth <span class="token operator">=</span> measureTabel<span class="token punctuation">.</span>width
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token comment">// draw from</span>
+    formCfg<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> itemLabel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">fabric<span class="token punctuation">.</span>Textbox</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>item<span class="token punctuation">.</span>label<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">：</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">left</span><span class="token operator">:</span> options<span class="token punctuation">.</span>padding<span class="token punctuation">,</span>
+        <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontFamily<span class="token punctuation">,</span>
+        <span class="token literal-property property">fontSize</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontSize<span class="token punctuation">,</span>
+        <span class="token literal-property property">fill</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontColor<span class="token punctuation">,</span>
+        <span class="token literal-property property">textAlign</span><span class="token operator">:</span> <span class="token string">'right'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">top</span><span class="token operator">:</span> nextTop<span class="token punctuation">,</span>
+        <span class="token literal-property property">width</span><span class="token operator">:</span> labelWidth<span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+      <span class="token keyword">const</span> itemContent <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">fabric<span class="token punctuation">.</span>Textbox</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>content<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">left</span><span class="token operator">:</span> options<span class="token punctuation">.</span>padding <span class="token operator">+</span> labelWidth<span class="token punctuation">,</span>
+        <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontFamily<span class="token punctuation">,</span>
+        <span class="token literal-property property">fontSize</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontSize<span class="token punctuation">,</span>
+        <span class="token literal-property property">fill</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontColor<span class="token punctuation">,</span>
+        <span class="token literal-property property">top</span><span class="token operator">:</span> nextTop<span class="token punctuation">,</span>
+        <span class="token literal-property property">width</span><span class="token operator">:</span> canvas<span class="token punctuation">.</span>width <span class="token operator">-</span> <span class="token number">2</span> <span class="token operator">*</span> options<span class="token punctuation">.</span>padding <span class="token operator">-</span> labelWidth<span class="token punctuation">,</span>
+        <span class="token literal-property property">splitByGrapheme</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 自动换行</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+      nextTop <span class="token operator">+=</span> itemContent<span class="token punctuation">.</span>height <span class="token operator">+</span> <span class="token number">10</span>
+      canvas<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>itemLabel<span class="token punctuation">)</span>
+      canvas<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>itemContent<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token comment">// adjust img height</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>nextTop <span class="token operator">></span> options<span class="token punctuation">.</span>imgHeight<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      options<span class="token punctuation">.</span>imgHeight <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span>nextTop <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">)</span>
+      canvas<span class="token punctuation">.</span><span class="token function">setHeight</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>imgHeight<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> canvas<span class="token punctuation">.</span><span class="token function">toDataURL</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="异步优化"><a href="#异步优化" class="headerlink" title="异步优化"></a>异步优化</h3><h4 id="前置场景"><a href="#前置场景" class="headerlink" title="前置场景"></a>前置场景</h4><p>系统提供了文章预览功能，展示一系列的文章标题，鼠标悬浮时展示文章内容（文章内放入图片也要展示）。<br><del>后端说提供不了缩略图，而且这个功能很重要，完成不了领导就不高兴，领导不高兴项目就完蛋了，项目没有回款的话公司就倒闭了，所以无论如何前端自己想办法完成。</del><br>方案是：前端直接 v-html 展示算了，正好 tinymce 保存的就是 html 格式，请求到数据后生成图片占位符再塞到 v-html 中。</p>
+<p>总感觉哪里不对，但是能用。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 请求文章列表</span>
+<span class="token keyword">let</span> tempList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token function">list</span><span class="token punctuation">(</span>queryData<span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span> tempList <span class="token operator">=</span> res<span class="token punctuation">.</span>data<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">finally</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    tempList<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+        <span class="token operator">...</span>item<span class="token punctuation">,</span>
+        <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">renderContentImgHolder</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>content<span class="token punctuation">)</span> <span class="token comment">// 存放 html 字符串</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">renderContentImgHolder</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> div <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span>
+  div<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> item<span class="token punctuation">.</span>content
+  <span class="token keyword">const</span> imgs <span class="token operator">=</span> div<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">'.mce-img-holder'</span><span class="token punctuation">)</span>
+  imgs<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">e<span class="token punctuation">,</span> index</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token operator">?.</span>dataset<span class="token operator">?.</span>placeholder<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> img <span class="token operator">=</span> TinyUtil<span class="token punctuation">.</span><span class="token function">genImgHolderByForm</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>dataset<span class="token punctuation">.</span>placeholder<span class="token punctuation">)</span><span class="token punctuation">)</span>
+      e<span class="token punctuation">.</span>src <span class="token operator">=</span> img<span class="token punctuation">.</span>src
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> div<span class="token punctuation">.</span>innerHTML
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="异步优化-1"><a href="#异步优化-1" class="headerlink" title="异步优化"></a>异步优化</h4><p>不出意外地出意外了，有几篇文章插入了上百个图片占位符，回显单个文章有卡顿感，展示文章缩略图时甚至能卡黑屏。</p>
+<p>测试项目中3.2方案 191 张图片占位符用了 7233ms，cpu 一下子就满了，怪离谱的。</p>
+<p>那就改成异步的：加载时先展示空白图片占位符（生成一次url, 不耗时），在 worker 线程中批量生成图片占位符（避免页面卡顿），在主线程中接收占位符的 url 并回填（使用 mceId 查找元素，替换 src）。遗憾的是，Fabric 不支持在 worker 中，只能自己用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/OffscreenCanvas">OffscreenCanvas</a> 写，闻者伤心，听者落泪。</p>
+<p>页面中将数据发送给 worker 处理，监听自定义事件处理数据回填即可。</p>
+<p>下附生成占位符的性能对比 (100 张图片)</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>轮次</th>
+<th>耗时（ms）</th>
+<th>平均耗时（ms）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OffscreenCanvas （await）</td>
+<td>1</td>
+<td>519</td>
+<td>538</td>
+</tr>
+<tr>
+<td>…</td>
+<td>2</td>
+<td>547</td>
+<td></td>
+</tr>
+<tr>
+<td>…</td>
+<td>3</td>
+<td>549</td>
+<td></td>
+</tr>
+<tr>
+<td>OffscreenCanvas （promise）</td>
+<td>1</td>
+<td>510</td>
+<td>513</td>
+</tr>
+<tr>
+<td>…</td>
+<td>2</td>
+<td>518</td>
+<td></td>
+</tr>
+<tr>
+<td>…</td>
+<td>3</td>
+<td>513</td>
+<td></td>
+</tr>
+<tr>
+<td>Canvas</td>
+<td>1</td>
+<td>419</td>
+<td>421</td>
+</tr>
+<tr>
+<td>…</td>
+<td>2</td>
+<td>422</td>
+<td></td>
+</tr>
+<tr>
+<td>…</td>
+<td>3</td>
+<td>422</td>
+<td></td>
+</tr>
+<tr>
+<td>fabric</td>
+<td>1</td>
+<td>1589</td>
+<td>1571</td>
+</tr>
+<tr>
+<td>…</td>
+<td>2</td>
+<td>1541</td>
+<td></td>
+</tr>
+<tr>
+<td>…</td>
+<td>3</td>
+<td>1584</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>测试程序</strong></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> TinyCanvas <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"./../lib/main"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> fabric <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"fabric"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token constant">FORM_ITEMS</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">"活动名称"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">content</span><span class="token operator">:</span>
+      <span class="token string">"活动名称活动名称活动名称活动名称活动名称活动名称活动名称活动名称活动名称"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">"活动区域"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"区域一"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">"活动时间"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"2023-09-01 ~ 2023-09-02"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">"活动性质"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"美食/餐厅线上活动、地推活动、线下主题活动"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">"特殊资源"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"线上品牌商赞助、线下场地免费"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">"备注"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"备注"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token literal-property property">btn</span><span class="token operator">:</span> HTMLButtonElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">"#btn"</span><span class="token punctuation">)</span><span class="token operator">!</span><span class="token punctuation">;</span>
+btn<span class="token punctuation">.</span><span class="token function-variable function">onclick</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// testOffscreenCanvas();</span>
+  <span class="token comment">// await testOffscreenCanvasAwait();</span>
+  <span class="token comment">// testCanvas();</span>
+  <span class="token function">testFabric</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">testOffscreenCanvas</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> timeCalc <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">offscrrenCanvas</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> imgNum <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> startTime <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> formItems <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token constant">FORM_ITEMS</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> imgNum<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    formItems<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">.</span>content <span class="token operator">=</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token string">"备注"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">repeat</span><span class="token punctuation">(</span>i <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> canvas <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TinyCanvas</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token number">600</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">height</span><span class="token operator">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    canvas<span class="token punctuation">.</span><span class="token function">renderForm</span><span class="token punctuation">(</span><span class="token string">"【xxx图】"</span><span class="token punctuation">,</span> formItems<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">url</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      count<span class="token operator">++</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>count <span class="token operator">===</span> imgNum<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        timeCalc<span class="token punctuation">.</span>offscrrenCanvas <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> startTime<span class="token punctuation">;</span>
+        console<span class="token punctuation">.</span><span class="token function">table</span><span class="token punctuation">(</span>timeCalc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">testOffscreenCanvasAwait</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> timeCalc <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">offscrrenCanvas</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> imgNum <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> startTime <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> formItems <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token constant">FORM_ITEMS</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> imgNum<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    formItems<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">.</span>content <span class="token operator">=</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token string">"备注"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">repeat</span><span class="token punctuation">(</span>i <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> canvas <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TinyCanvas</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token number">600</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">height</span><span class="token operator">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">await</span> canvas<span class="token punctuation">.</span><span class="token function">renderForm</span><span class="token punctuation">(</span><span class="token string">"【xxx图】"</span><span class="token punctuation">,</span> formItems<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  timeCalc<span class="token punctuation">.</span>offscrrenCanvas <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> startTime<span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">table</span><span class="token punctuation">(</span>timeCalc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">testCanvas</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> timeCalc <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">offscrrenCanvas</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> imgNum <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> startTime <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> formItems <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token constant">FORM_ITEMS</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> imgNum<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    formItems<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">.</span>content <span class="token operator">=</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token string">"备注"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">repeat</span><span class="token punctuation">(</span>i <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> canvas <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TinyCanvas</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token number">600</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">height</span><span class="token operator">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">isOffscreen</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    canvas<span class="token punctuation">.</span><span class="token function">renderFormSync</span><span class="token punctuation">(</span><span class="token string">"【xxx图】"</span><span class="token punctuation">,</span> formItems<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  timeCalc<span class="token punctuation">.</span>offscrrenCanvas <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> startTime<span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">table</span><span class="token punctuation">(</span>timeCalc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">testFabric</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> timeCalc <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">fabric</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> params <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">imgWidth</span><span class="token operator">:</span> <span class="token number">600</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">imgHeight</span><span class="token operator">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">caption</span><span class="token operator">:</span> <span class="token string">"【xxx图】"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> imgNum <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> startTime <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> formItems <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token constant">FORM_ITEMS</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> imgNum<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    formItems<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">.</span>content <span class="token operator">=</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token string">"备注"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">repeat</span><span class="token punctuation">(</span>i <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">form2img</span><span class="token punctuation">(</span>formItems<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  timeCalc<span class="token punctuation">.</span>fabric <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> startTime<span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">table</span><span class="token punctuation">(</span>timeCalc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/** 图片表单 */</span>
+<span class="token keyword">function</span> <span class="token function">form2img</span><span class="token punctuation">(</span><span class="token parameter">formCfg<span class="token punctuation">,</span> params</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">imgWidth</span><span class="token operator">:</span> params<span class="token operator">?.</span>imgWidth <span class="token operator">||</span> <span class="token number">300</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">imgHeight</span><span class="token operator">:</span> params<span class="token operator">?.</span>imgHeight <span class="token operator">||</span> <span class="token number">150</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> <span class="token string">"serif"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">fontSize</span><span class="token operator">:</span> params<span class="token operator">?.</span>fontSize <span class="token operator">||</span> <span class="token number">14</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">fontColor</span><span class="token operator">:</span> params<span class="token operator">?.</span>fontColor <span class="token operator">||</span> <span class="token string">"#409EFF"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">backgroundColor</span><span class="token operator">:</span> params<span class="token operator">?.</span>backgroundColor <span class="token operator">||</span> <span class="token string">"#F4F4F5"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">padding</span><span class="token operator">:</span> params<span class="token punctuation">.</span>padding <span class="token operator">||</span> <span class="token number">10</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">labelWidth</span><span class="token operator">:</span> <span class="token punctuation">(</span>params<span class="token operator">?.</span>fontSize <span class="token operator">||</span> <span class="token number">14</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> canvas <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">fabric<span class="token punctuation">.</span>Canvas</span><span class="token punctuation">(</span><span class="token string">"canvasBox"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">width</span><span class="token operator">:</span> options<span class="token punctuation">.</span>imgWidth<span class="token punctuation">,</span>
+    <span class="token literal-property property">height</span><span class="token operator">:</span> options<span class="token punctuation">.</span>imgHeight<span class="token punctuation">,</span>
+    <span class="token literal-property property">backgroundColor</span><span class="token operator">:</span> options<span class="token punctuation">.</span>backgroundColor<span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> nextTop <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
+  <span class="token comment">// draw caption</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>params<span class="token operator">?.</span>caption<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> caption <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">fabric<span class="token punctuation">.</span>Text</span><span class="token punctuation">(</span>params<span class="token operator">?.</span>caption<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontFamily<span class="token punctuation">,</span>
+      <span class="token literal-property property">fontSize</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontSize<span class="token punctuation">,</span>
+      <span class="token literal-property property">fontWeight</span><span class="token operator">:</span> <span class="token string">"bold"</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">fill</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontColor<span class="token punctuation">,</span>
+      <span class="token literal-property property">left</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">top</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    canvas<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>caption<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    nextTop <span class="token operator">=</span> <span class="token number">10</span> <span class="token operator">+</span> caption<span class="token punctuation">.</span>height <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">// get max label width</span>
+  <span class="token keyword">let</span> labelWidth <span class="token operator">=</span> options<span class="token punctuation">.</span>labelWidth<span class="token punctuation">;</span>
+  formCfg<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> measureTabel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">fabric<span class="token punctuation">.</span>Textbox</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>item<span class="token punctuation">.</span>label<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">：</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">left</span><span class="token operator">:</span> options<span class="token punctuation">.</span>padding<span class="token punctuation">,</span>
+      <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontFamily<span class="token punctuation">,</span>
+      <span class="token literal-property property">fontSize</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontSize<span class="token punctuation">,</span>
+      <span class="token literal-property property">fill</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontColor<span class="token punctuation">,</span>
+      <span class="token literal-property property">textAlign</span><span class="token operator">:</span> <span class="token string">"right"</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">top</span><span class="token operator">:</span> nextTop<span class="token punctuation">,</span>
+      <span class="token literal-property property">width</span><span class="token operator">:</span> labelWidth<span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>labelWidth <span class="token operator">&lt;</span> measureTabel<span class="token punctuation">.</span>width<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      labelWidth <span class="token operator">=</span> measureTabel<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// draw from</span>
+  formCfg<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> itemLabel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">fabric<span class="token punctuation">.</span>Textbox</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>item<span class="token punctuation">.</span>label<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">：</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">left</span><span class="token operator">:</span> options<span class="token punctuation">.</span>padding<span class="token punctuation">,</span>
+      <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontFamily<span class="token punctuation">,</span>
+      <span class="token literal-property property">fontSize</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontSize<span class="token punctuation">,</span>
+      <span class="token literal-property property">fill</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontColor<span class="token punctuation">,</span>
+      <span class="token literal-property property">textAlign</span><span class="token operator">:</span> <span class="token string">"right"</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">top</span><span class="token operator">:</span> nextTop<span class="token punctuation">,</span>
+      <span class="token literal-property property">width</span><span class="token operator">:</span> labelWidth<span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> itemContent <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">fabric<span class="token punctuation">.</span>Textbox</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>content<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">left</span><span class="token operator">:</span> options<span class="token punctuation">.</span>padding <span class="token operator">+</span> labelWidth<span class="token punctuation">,</span>
+      <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontFamily<span class="token punctuation">,</span>
+      <span class="token literal-property property">fontSize</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontSize<span class="token punctuation">,</span>
+      <span class="token literal-property property">fill</span><span class="token operator">:</span> options<span class="token punctuation">.</span>fontColor<span class="token punctuation">,</span>
+      <span class="token literal-property property">top</span><span class="token operator">:</span> nextTop<span class="token punctuation">,</span>
+      <span class="token literal-property property">width</span><span class="token operator">:</span> canvas<span class="token punctuation">.</span>width <span class="token operator">-</span> <span class="token number">2</span> <span class="token operator">*</span> options<span class="token punctuation">.</span>padding <span class="token operator">-</span> labelWidth<span class="token punctuation">,</span>
+      <span class="token literal-property property">splitByGrapheme</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 自动换行</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    nextTop <span class="token operator">+=</span> itemContent<span class="token punctuation">.</span>height <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    canvas<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>itemLabel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    canvas<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>itemContent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// adjust img height</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>nextTop <span class="token operator">></span> options<span class="token punctuation">.</span>imgHeight<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    options<span class="token punctuation">.</span>imgHeight <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span>nextTop <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    canvas<span class="token punctuation">.</span><span class="token function">setHeight</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>imgHeight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> canvas<span class="token punctuation">.</span><span class="token function">toDataURL</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="图片表单"><a href="#图片表单" class="headerlink" title="图片表单"></a>图片表单</h5><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">interface</span> <span class="token class-name">ITinyCanvasOptions</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">/**
+   * 图片宽度
+   */</span>
+  <span class="token literal-property property">width</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+  <span class="token comment">/**
+   * 图片高度
+   */</span>
+  <span class="token literal-property property">height</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+  <span class="token comment">/**
+   * 是否离屏渲染
+   */</span>
+  isOffscreen<span class="token operator">?</span><span class="token operator">:</span> boolean<span class="token punctuation">;</span>
+  <span class="token comment">/**
+   * 背景色
+   */</span>
+  backgroundColor<span class="token operator">?</span><span class="token operator">:</span> string <span class="token operator">|</span> CanvasGradient <span class="token operator">|</span> CanvasPattern<span class="token punctuation">;</span>
+  <span class="token comment">/**
+   * base64参数
+   */</span>
+  blobOptions<span class="token operator">?</span><span class="token operator">:</span> IBlobOptions<span class="token punctuation">;</span>
+  <span class="token comment">/**
+   * 字号
+   */</span>
+  fontSize<span class="token operator">?</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+  <span class="token comment">/**
+   * 字体颜色
+   */</span>
+  fontColor<span class="token operator">?</span><span class="token operator">:</span> string<span class="token punctuation">;</span>
+  <span class="token comment">/**
+   * 字体
+   */</span>
+  fontFamily<span class="token operator">?</span><span class="token operator">:</span> string<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">interface</span> <span class="token class-name">IBlobOptions</span> <span class="token punctuation">&#123;</span>
+  type<span class="token operator">?</span><span class="token operator">:</span> string<span class="token punctuation">;</span>
+  quality<span class="token operator">?</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">interface</span> <span class="token class-name">IFormItem</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">label</span><span class="token operator">:</span> string<span class="token punctuation">;</span>
+  <span class="token literal-property property">content</span><span class="token operator">:</span> string <span class="token operator">|</span> number <span class="token operator">|</span> boolean<span class="token punctuation">;</span>
+  labelWidth<span class="token operator">?</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+  contentHeight<span class="token operator">?</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">interface</span> <span class="token class-name">ITextOptions</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">left</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+  <span class="token literal-property property">top</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+  <span class="token literal-property property">width</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> <span class="token literal-property property">DefaultTinyCanvasOptions</span><span class="token operator">:</span> ITinyCanvasOptions <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">height</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">isOffscreen</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">backgroundColor</span><span class="token operator">:</span> <span class="token string">"#F4F4F5"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">fontSize</span><span class="token operator">:</span> <span class="token number">16</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">fontColor</span><span class="token operator">:</span> <span class="token string">"#409EFF"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> <span class="token string">"serif"</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">TinyCanvas</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">private</span> <span class="token literal-property property">canvas</span><span class="token operator">:</span> OffscreenCanvas <span class="token operator">|</span> HTMLCanvasElement<span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token literal-property property">ctx</span><span class="token operator">:</span>
+    <span class="token operator">|</span> OffscreenCanvasRenderingContext2D
+    <span class="token operator">|</span> CanvasRenderingContext2D
+    <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token literal-property property">options</span><span class="token operator">:</span> ITinyCanvasOptions<span class="token punctuation">;</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">?</span><span class="token operator">:</span> ITinyCanvasOptions</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>options <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span>DefaultTinyCanvasOptions<span class="token punctuation">,</span> <span class="token operator">...</span>options <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>canvas <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>isOffscreen
+      <span class="token operator">?</span> <span class="token keyword">new</span> <span class="token class-name">OffscreenCanvas</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>width<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>height<span class="token punctuation">)</span>
+      <span class="token operator">:</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"canvas"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>ctx <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>canvas<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token string">"2d"</span><span class="token punctuation">)</span><span class="token operator">!</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>width <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>height <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>height<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token function">renderForm</span><span class="token punctuation">(</span>
+    <span class="token literal-property property">title</span><span class="token operator">:</span> string<span class="token punctuation">,</span>
+    <span class="token literal-property property">formItems</span><span class="token operator">:</span> IFormItem<span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">)</span><span class="token operator">:</span> Promise<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> imgHeight<span class="token punctuation">,</span> labelWidth <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">drawFrom</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> formItems<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>imgHeight <span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>height<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>height <span class="token operator">=</span> imgHeight<span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">drawFrom</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> formItems<span class="token punctuation">,</span> labelWidth<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>isOffscreen<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> blob <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>canvas <span class="token keyword">as</span> OffscreenCanvas<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">convertToBlob</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">reslove</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> fileReader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileReader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        fileReader<span class="token punctuation">.</span><span class="token function-variable function">onload</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+          <span class="token function">reslove</span><span class="token punctuation">(</span><span class="token function">String</span><span class="token punctuation">(</span>fileReader<span class="token punctuation">.</span>result<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+        fileReader<span class="token punctuation">.</span><span class="token function">readAsDataURL</span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">reslove</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token function">reslove</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>canvas <span class="token keyword">as</span> HTMLCanvasElement<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toDataURL</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">public</span> <span class="token function">renderFormSync</span><span class="token punctuation">(</span>title<span class="token operator">:</span> string<span class="token punctuation">,</span> <span class="token literal-property property">formItems</span><span class="token operator">:</span> IFormItem<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> string <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>isOffscreen<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"[TinyUtil]: renderFormSync is undefined when offscreen"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> imgHeight<span class="token punctuation">,</span> labelWidth <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">drawFrom</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> formItems<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>imgHeight <span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>height<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>height <span class="token operator">=</span> imgHeight<span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">drawFrom</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> formItems<span class="token punctuation">,</span> labelWidth<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>canvas <span class="token keyword">as</span> HTMLCanvasElement<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toDataURL</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">public</span> <span class="token function">resetHeight</span><span class="token punctuation">(</span><span class="token parameter">height<span class="token operator">?</span><span class="token operator">:</span> number</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>height <span class="token operator">=</span> height <span class="token operator">||</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>height<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">private</span> <span class="token function">drawFrom</span><span class="token punctuation">(</span>
+    <span class="token literal-property property">title</span><span class="token operator">:</span> string<span class="token punctuation">,</span>
+    <span class="token literal-property property">formItems</span><span class="token operator">:</span> IFormItem<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    _labelWidth<span class="token operator">?</span><span class="token operator">:</span> number
+  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">imgHeight</span><span class="token operator">:</span> number<span class="token punctuation">;</span> labelWidth<span class="token operator">:</span> number <span class="token punctuation">&#125;</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">drawBackground</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 最长标签宽度</span>
+    <span class="token keyword">let</span> labelWidth <span class="token operator">=</span> _labelWidth <span class="token operator">||</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>_labelWidth<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      formItems<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> label <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>ctx<span class="token operator">?.</span><span class="token function">measureText</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>label <span class="token operator">+</span> <span class="token string">"："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        item<span class="token punctuation">.</span>labelWidth <span class="token operator">=</span> label<span class="token operator">?.</span>width<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>label<span class="token operator">?.</span>width <span class="token operator">&amp;&amp;</span> label<span class="token operator">?.</span>width <span class="token operator">></span> labelWidth<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          labelWidth <span class="token operator">=</span> label<span class="token operator">?.</span>width<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">let</span> nextTop <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> padding <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token comment">// 题注</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>ctx<span class="token operator">!</span><span class="token punctuation">.</span>font <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">bold </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>fontSize<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">px </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>fontFamily<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> titleHeight <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">drawText</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">left</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">top</span><span class="token operator">:</span> nextTop <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>fontSize<span class="token operator">!</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>width <span class="token operator">-</span> padding<span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    nextTop <span class="token operator">+=</span> titleHeight <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>fontSize<span class="token operator">!</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token comment">// 表单</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>ctx<span class="token operator">!</span><span class="token punctuation">.</span>font <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>fontSize<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">px </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>fontFamily<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+    formItems<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> labelLeft <span class="token operator">=</span> padding <span class="token operator">+</span> labelWidth <span class="token operator">-</span> item<span class="token punctuation">.</span>labelWidth<span class="token operator">!</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> labelTop <span class="token operator">=</span> nextTop <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>fontSize<span class="token operator">!</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>ctx<span class="token operator">?.</span><span class="token function">fillText</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>label <span class="token operator">+</span> <span class="token string">"："</span><span class="token punctuation">,</span> labelLeft<span class="token punctuation">,</span> labelTop<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> contentHeight <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">drawText</span><span class="token punctuation">(</span><span class="token function">String</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">left</span><span class="token operator">:</span> padding <span class="token operator">+</span> labelWidth<span class="token punctuation">,</span>
+        <span class="token literal-property property">top</span><span class="token operator">:</span> labelTop<span class="token punctuation">,</span>
+        <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>width <span class="token operator">-</span> <span class="token number">2</span> <span class="token operator">*</span> padding <span class="token operator">-</span> Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span>labelWidth<span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      nextTop <span class="token operator">+=</span> contentHeight <span class="token operator">+</span> padding<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">imgHeight</span><span class="token operator">:</span> nextTop<span class="token punctuation">,</span> labelWidth <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">private</span> <span class="token function">drawText</span><span class="token punctuation">(</span>text<span class="token operator">:</span> string<span class="token punctuation">,</span> textOptions<span class="token operator">?</span><span class="token operator">:</span> ITextOptions<span class="token punctuation">)</span><span class="token operator">:</span> number <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> indexStart <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token literal-property property">lines</span><span class="token operator">:</span> string<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> indexEnd <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> indexEnd <span class="token operator">&lt;=</span> text<span class="token punctuation">.</span>length<span class="token punctuation">;</span> indexEnd<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> str <span class="token operator">=</span> text<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>indexStart<span class="token punctuation">,</span> indexEnd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> measureText <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>ctx<span class="token operator">?.</span><span class="token function">measureText</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">// 换行</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>measureText<span class="token operator">?.</span>width<span class="token operator">!</span> <span class="token operator">></span> textOptions<span class="token operator">?.</span>width<span class="token operator">!</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        lines<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>text<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>indexStart<span class="token punctuation">,</span> indexEnd <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        indexStart <span class="token operator">=</span> indexEnd <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+      <span class="token comment">// 最后一个字符</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>indexEnd <span class="token operator">===</span> text<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        lines<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>text<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>indexStart<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">let</span> top <span class="token operator">=</span> textOptions<span class="token operator">?.</span>top<span class="token punctuation">;</span>
+    lines<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">line<span class="token punctuation">,</span> index</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      top <span class="token operator">=</span> textOptions<span class="token operator">?.</span>top<span class="token operator">!</span> <span class="token operator">+</span> index <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>fontSize<span class="token operator">!</span> <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>ctx<span class="token operator">?.</span><span class="token function">fillText</span><span class="token punctuation">(</span>line<span class="token punctuation">,</span> textOptions<span class="token operator">?.</span>left<span class="token operator">!</span><span class="token punctuation">,</span> top<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> height <span class="token operator">=</span> top<span class="token operator">!</span> <span class="token operator">-</span> textOptions<span class="token operator">?.</span>top<span class="token operator">!</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>fontSize<span class="token operator">!</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> height<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">private</span> <span class="token function">drawBackground</span><span class="token punctuation">(</span><span class="token parameter">backgroundColor<span class="token operator">?</span><span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// background</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>ctx<span class="token operator">!</span><span class="token punctuation">.</span>fillStyle <span class="token operator">=</span>
+      backgroundColor <span class="token operator">||</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>backgroundColor <span class="token operator">||</span> <span class="token string">"#FFF"</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>ctx<span class="token operator">!</span><span class="token punctuation">.</span><span class="token function">fillRect</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>width<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// recover font</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>ctx<span class="token operator">!</span><span class="token punctuation">.</span>font <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>fontSize<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">px </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>fontFamily<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>ctx<span class="token operator">!</span><span class="token punctuation">.</span>fillStyle <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>fontColor<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="worker-js"><a href="#worker-js" class="headerlink" title="worker.js"></a>worker.js</h5><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/* eslint-disable @typescript-eslint/naming-convention */</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>TinyCanvas<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'./tiny-util.umd.cjs'</span>
+<span class="token keyword">const</span> CanvasCache <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token function-variable function">onmessage</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span>sessionId<span class="token punctuation">,</span> tasks<span class="token punctuation">&#125;</span> <span class="token operator">=</span> event<span class="token punctuation">.</span>data
+  tasks<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> placeholder <span class="token operator">=</span> <span class="token keyword">typeof</span> e<span class="token punctuation">.</span>data <span class="token operator">===</span> <span class="token string">'string'</span> <span class="token operator">?</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>data<span class="token punctuation">)</span> <span class="token operator">:</span> e<span class="token punctuation">.</span>data
+    <span class="token keyword">const</span> <span class="token punctuation">&#123;</span>caption<span class="token punctuation">,</span> formCfg<span class="token punctuation">,</span> columns <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">&#125;</span> <span class="token operator">=</span> placeholder
+    <span class="token keyword">let</span> canvasInstance <span class="token operator">=</span> CanvasCache<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>columns<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>canvasInstance<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> tinyCanvasOptions <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">isOffscreen</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">width</span><span class="token operator">:</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span><span class="token number">635</span> <span class="token operator">/</span> columns<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">height</span><span class="token operator">:</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span><span class="token number">152</span> <span class="token operator">-</span> <span class="token punctuation">(</span>columns <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">fontSize</span><span class="token operator">:</span> <span class="token number">16</span> <span class="token operator">-</span> <span class="token punctuation">(</span>columns <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">backgroundColor</span><span class="token operator">:</span> <span class="token string">'#F4F4F5'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">fontColor</span><span class="token operator">:</span> <span class="token string">'#409EFF'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> <span class="token string">'serif'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span>
+      canvasInstance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TinyCanvas</span><span class="token punctuation">(</span>tinyCanvasOptions<span class="token punctuation">)</span>
+      CanvasCache<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>columns<span class="token punctuation">,</span> canvasInstance<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    canvasInstance<span class="token punctuation">.</span><span class="token function">resetHeight</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    canvasInstance
+      <span class="token punctuation">.</span><span class="token function">renderForm</span><span class="token punctuation">(</span>caption<span class="token punctuation">,</span> <span class="token keyword">typeof</span> formCfg <span class="token operator">===</span> <span class="token string">'string'</span> <span class="token operator">?</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>formCfg<span class="token punctuation">)</span> <span class="token operator">:</span> formCfg<span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">url</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        self<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+          sessionId<span class="token punctuation">,</span>
+          <span class="token literal-property property">id</span><span class="token operator">:</span> e<span class="token punctuation">.</span>id<span class="token punctuation">,</span>
+          <span class="token literal-property property">url</span><span class="token operator">:</span> url<span class="token punctuation">,</span>
+          <span class="token literal-property property">extra</span><span class="token operator">:</span> e<span class="token punctuation">.</span>extra
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/24/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-angle-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/01/08/%E6%9E%98%E5%87%BF%E5%85%AD%E5%90%88%EF%BC%8C%E5%A4%A9%E4%B8%8B%E7%AC%AC%E4%B8%80/" rel="next" title="枘凿六合，天下第一">
+                  枘凿六合，天下第一 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="powered-by">
+    <span id="timeDate">载入天数...</span>由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+  <script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("08/09/2023 0:00:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天，";
+    }
+    setInterval("createtime()",250);
+  </script>
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">皖ICP备2023013747号-1 </a>
+      <img src="/images/beian.png" alt=""><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34032202000204" rel="noopener" target="_blank">皖公网安备 34032202000204号 </a>
+  </div>
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

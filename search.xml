@@ -1,32 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2023/08/24/hello-world/</url>
-    <content><![CDATA[<p>本站使用博客框架 <a href="https://hexo.io/">Hexo</a> 建站，配置参考 <a href="https://zhuanlan.zhihu.com/p/618864711">Hexo+Next主题搭建个人博客+优化全过程（完整详细版）</a>.</p>
+    <title>Blender 黑体骑士Ⅱ</title>
+    <url>/2024/02/28/Blender-%E9%BB%91%E4%BD%93%E9%AA%91%E5%A3%AB%E2%85%A1/</url>
+    <content><![CDATA[<p>Blender 练习案例</p>
 <span id="more"></span>
 
-<h2 id="建站准备"><a href="#建站准备" class="headerlink" title="建站准备"></a>建站准备</h2><ol>
-<li>域名注册：<a href="https://buy.cloud.tencent.com/domain/">腾讯云·域名注册</a></li>
-<li>购买服务器：<a href="https://buy.cloud.tencent.com/lighthouse">腾讯云·轻量应用服务器</a>, 时长至少3个月(备案用)</li>
-<li>域名备案：<br>a. 腾讯云备案审核：<a href="https://console.cloud.tencent.com/beian/manage">腾讯云·网站备案</a>, 请查看不同省份的备案材料需求<br>b. 管局审核：<a href="https://beian.miit.gov.cn/">ICP/IP地址/域名信息备案管理系统</a>, 若未收到短信，可再次提交（腾讯云工作人员会主动联系）<br>c. 备案成功后处理说明：<a href="https://cloud.tencent.com/document/product/243/61412#.E5.A6.82.E4.BD.95.E6.B7.BB.E5.8A.A0.E7.BD.91.E7.AB.99.E5.A4.87.E6.A1.88.E5.8F.B7.EF.BC.9F">腾讯云·备案成功后处理说明</a></li>
-<li>网站添加 https: <a href="https://cloud.tencent.com/document/product/400/35244?from_cn_redirect=1">Nginx 服务器 SSL 证书安装部署</a></li>
-<li>工具：<a href="https://yasuo.xunjiepdf.com/img/">图片压缩软件在线版</a></li>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><h3 id="氮化镓充电器建模"><a href="#氮化镓充电器建模" class="headerlink" title="氮化镓充电器建模"></a>氮化镓充电器建模</h3><img src="/2024/02/28/Blender-%E9%BB%91%E4%BD%93%E9%AA%91%E5%A3%AB%E2%85%A1/%E6%B0%AE%E5%8C%96%E9%95%93%E5%85%85%E7%94%B5%E5%99%A8%E5%BB%BA%E6%A8%A1.png" class="" title="氮化镓充电器建模">
+
+<h3 id="氮化镓充电器PRO"><a href="#氮化镓充电器PRO" class="headerlink" title="氮化镓充电器PRO"></a>氮化镓充电器PRO</h3><img src="/2024/02/28/Blender-%E9%BB%91%E4%BD%93%E9%AA%91%E5%A3%AB%E2%85%A1/%E6%B0%AE%E5%8C%96%E9%95%93%E5%85%85%E7%94%B5%E5%99%A8PRO.png" class="" title="氮化镓充电器PRO">
+
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><ol>
+<li><a href="https://www.bilibili.com/video/BV1zh411Y7LX?p=29&spm_id_from=pageDriver&vd_source=1e15750346a6b797fe55bee7e478af4c">【合集8.21已更新93话】Blender 2.9-3.4黑铁骑士Ⅱ系统零基础入门教程(持续更新+中文字幕+普通话+不敷衍+义务教育+案例+学习)</a></li>
 </ol>
-<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+      <categories>
+        <category>Blender</category>
+      </categories>
   </entry>
   <entry>
     <title>图片占位符</title>
@@ -841,6 +831,34 @@ btn<span class="token punctuation">.</span><span class="token function-variable 
       </categories>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2023/08/24/hello-world/</url>
+    <content><![CDATA[<p>本站使用博客框架 <a href="https://hexo.io/">Hexo</a> 建站，配置参考 <a href="https://zhuanlan.zhihu.com/p/618864711">Hexo+Next主题搭建个人博客+优化全过程（完整详细版）</a>.</p>
+<span id="more"></span>
+
+<h2 id="建站准备"><a href="#建站准备" class="headerlink" title="建站准备"></a>建站准备</h2><ol>
+<li>域名注册：<a href="https://buy.cloud.tencent.com/domain/">腾讯云·域名注册</a></li>
+<li>购买服务器：<a href="https://buy.cloud.tencent.com/lighthouse">腾讯云·轻量应用服务器</a>, 时长至少3个月(备案用)</li>
+<li>域名备案：<br>a. 腾讯云备案审核：<a href="https://console.cloud.tencent.com/beian/manage">腾讯云·网站备案</a>, 请查看不同省份的备案材料需求<br>b. 管局审核：<a href="https://beian.miit.gov.cn/">ICP/IP地址/域名信息备案管理系统</a>, 若未收到短信，可再次提交（腾讯云工作人员会主动联系）<br>c. 备案成功后处理说明：<a href="https://cloud.tencent.com/document/product/243/61412#.E5.A6.82.E4.BD.95.E6.B7.BB.E5.8A.A0.E7.BD.91.E7.AB.99.E5.A4.87.E6.A1.88.E5.8F.B7.EF.BC.9F">腾讯云·备案成功后处理说明</a></li>
+<li>网站添加 https: <a href="https://cloud.tencent.com/document/product/400/35244?from_cn_redirect=1">Nginx 服务器 SSL 证书安装部署</a></li>
+<li>工具：<a href="https://yasuo.xunjiepdf.com/img/">图片压缩软件在线版</a></li>
+</ol>
+<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>枘凿六合，天下第一</title>
     <url>/2024/01/08/%E6%9E%98%E5%87%BF%E5%85%AD%E5%90%88%EF%BC%8C%E5%A4%A9%E4%B8%8B%E7%AC%AC%E4%B8%80/</url>
     <content><![CDATA[<p>【枘凿六合】是《崩坏：星穹铁道》中的一款二阶魔方解密游戏，记录 Threejs 实现过程。</p>
@@ -1484,22 +1502,6 @@ btn<span class="token punctuation">.</span><span class="token function-variable 
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
       <categories>
         <category>Threejs</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Blender 黑体骑士Ⅱ</title>
-    <url>/2024/02/28/Blender-%E9%BB%91%E4%BD%93%E9%AA%91%E5%A3%AB%E2%85%A1/</url>
-    <content><![CDATA[<p>Blender 练习案例</p>
-<span id="more"></span>
-
-<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><h3 id="氮化镓充电器建模"><a href="#氮化镓充电器建模" class="headerlink" title="氮化镓充电器建模"></a>氮化镓充电器建模</h3><img src="/2024/02/28/Blender-%E9%BB%91%E4%BD%93%E9%AA%91%E5%A3%AB%E2%85%A1/%E6%B0%AE%E5%8C%96%E9%95%93%E5%85%85%E7%94%B5%E5%99%A8%E5%BB%BA%E6%A8%A1.png" class="" title="枘凿六合，天下第一">
-
-<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><ol>
-<li><a href="https://www.bilibili.com/video/BV1zh411Y7LX?p=29&spm_id_from=pageDriver&vd_source=1e15750346a6b797fe55bee7e478af4c">【合集8.21已更新93话】Blender 2.9-3.4黑铁骑士Ⅱ系统零基础入门教程(持续更新+中文字幕+普通话+不敷衍+义务教育+案例+学习)</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Blender</category>
       </categories>
   </entry>
 </search>
